@@ -1,0 +1,22 @@
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+relative_permalinks: true
+
+# Setup
+title:            Angular UX Tips
+tagline:          'Hints and hacks for high quality UI'
+description:      'Collection of bite-sized hints and hacks for the UX-minded programmer'
+url:              http://localhost
+baseurl:          /
+
+host:             0.0.0.0
+
+author:
+  name:           'Nick Matantsev'
+  url:            https://twitter.com/unframework
+
+paginate:         5
