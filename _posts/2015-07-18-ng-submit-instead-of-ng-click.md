@@ -16,6 +16,8 @@ If those form inputs do not submit form data on when the Enter key is pressed, t
 
 Folks type, then they hit Enter. If the Enter key does not do anything, they are forced to reach for their mouse or to tab over to the submit button: an interruption in their flow, and a blemish on the impression of subtle quality that you might be striving for. Not every form will have this expectation, for sure, but settling for anything but consistent support across the board might confuse and annoy users even further!
 
+Most importantly, we must not break the experience for users with accessibility devices. Not everyone uses a mouse, so relying only on click-handling is a grave mistake.
+
 Now, if your input elements *do* support submit-on-Enter, is it implemented the simplistic way, or the clever way that will save your time and sanity over the project's lifetime?
 
 Let's look at the typical markup offered by the average AngularJS form tutorial out there:
