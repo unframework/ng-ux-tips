@@ -9,7 +9,7 @@ relative_permalinks: true
 # Setup
 title:            Angular UX Tips
 tagline:          'Hints and hacks for high quality UI'
-description:      'Collection of bite-sized hints and hacks for the UX-minded programmer'
+description:      'Collection of hints and hacks for the UX-minded programmer'
 url:              http://localhost
 baseurl:          /
 

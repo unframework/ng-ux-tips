@@ -5,7 +5,7 @@ title: Clever Hack to Respect Keyboard Access in User Forms
 
 Be honest. Do the input fields in your app have broken submit-on-Enter support?
 
-Chances are, if you are working on an AngularJS codebase, you are posting data via AJAX requests. And chances are, some of that data comes from user forms. What do we mean by forms? Some examples:
+Chances are, if you are working on an AngularJS codebase, you are posting data via AJAX requests. And similar chances are, some of that data comes from user forms. What do we mean by forms? Some examples:
 
 * login form
 * signup page for new users
