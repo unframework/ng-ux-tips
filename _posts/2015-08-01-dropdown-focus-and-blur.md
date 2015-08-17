@@ -51,13 +51,15 @@ Let's start with a simple menu:
 </html>
 ```
 
-The user opens the dropdown by clicking (or hitting `Enter`) on the "Choose Action" button. Then they click the dropdown element, and so on.
+The user opens the dropdown by clicking (or hitting `Enter`) on the "Choose Action" button. That displays the list of dropdown items in the `div` next to that button. Then they click a specific element in the dropdown menu, and proceed onwards. Looks good so far.
 
-But what if they choose not to do anything? The user might scan the action list and decide to click on something else on the screen instead. The dropdown menu will be "stuck" there, which is not consistent with how most native implementations would behave in that case. The user can, of course, click the toggle button again, but we can do better than that!
+But what if they choose not to do anything? The user might scan the action list and decide to click on something else on the screen instead. The dropdown menu will be "stuck" there, which is not consistent with how most native implementations would behave in that case. The user can, of course, click the toggle button again, but we should have better quality UX than that.
 
-Right off the bat, let's not even think of simply attaching a `click` handler to the `body`. There are many ways to lose focus, and some do not even involve user input (e.g. an app alert popup designed to "steal focus"). We need to use a deeper, more comprehensive hook.
+We need a way to detect when the user starts performing actions elsewhere.
 
-That hook, of course, is the `blur` event that the browser generates on any focus change:
+Right off the bat, let's note that it is not enough to simply attach a `click` handler to the `body` element. There are many ways to lose focus, and some do not even involve user input (e.g. an app alert popup designed to "steal focus" and initiated via timeout or network activity). We need to use a deeper, more comprehensive hook.
+
+The browser gives us a hook like that: it is the `blur` event generated before a focus change from one element to another:
 
 ```html
 <html ng-app="app">
@@ -96,7 +98,7 @@ That hook, of course, is the `blur` event that the browser generates on any focu
 
 We added an `ng-blur` on the trigger button that hides the dropdown when that element loses focus. It makes sense: the trigger already has focus, so the browser will always send a `blur` event when the user clicks on something else or is interrupted by an external activity.
 
-But this doesn't actually work! When the user clicks on a dropdown menu item, or uses the keyboard to select it, the browser notifies our trigger `blur` handler first, which hides the menu and in turn prevents any further action. Oops!
+But this won't actually work! When the user clicks on a dropdown menu item, or uses the keyboard to select it, the browser notifies our trigger `blur` handler first, which hides the menu and in turn prevents any further action. Oops!
 
 What we want to track is a sort of a "compound focus". In other words, we consider the dropdown component to be still active if *either* the trigger, or any of its menu items hold user focus. We only want to process a `blur` event when the focus truly leaves all of those elements.
 
@@ -143,6 +145,6 @@ We put the `deep-blur` handler on the parent element of the entire dropdown and 
 
 The `deep-blur` directive only fires the blur callback when the user focus completely leaves the parent and all of its children; if the user switches focus between elements "under" the directive's element, no blur callback is triggered. This is why it is called "deep" blur - this directive is aware of the entire depth of the HTML elements under it. The [angular-deep-blur project homepage](http://myplanet.github.io/angular-deep-blur/) has a live demo that uses a dropdown menu as an example (not unexpectedly!).
 
-The above example is now very close to the expected "native-style" behaviour of dropdowns with regard to clicks and keyboard focus.
+The above example is now very close to the expected "native-style" behaviour of dropdowns with regard to clicks and keyboard focus. Naturally, all of this should also be encapsulated inside a reusable component, so that the dropdown-specific display/behaviour logic does not pollute the containing view's controller.
 
 Responding when the user clicks away from a dropdown menu is a subtle but important part of expected UX; not implementing that behaviour is a kind of omission that stumps the user flow and lowers the perceived quality of the entire interface. Implementing it is also surprisingly non-trivial, but the [angular-deep-blur](http://myplanet.github.io/angular-deep-blur/) removes a lot of the complexity of the task.
