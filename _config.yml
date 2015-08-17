@@ -10,7 +10,7 @@ relative_permalinks: true
 title:            Angular UX Tips
 tagline:          'Hints and hacks for high quality UI'
 description:      'Hints and hacks for the UX-minded programmer'
-url:              http://localhost
+url:              http://ng-ux.tips
 baseurl:          /
 
 host:             0.0.0.0
